@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Feasibility & Viability - Neural Nomads</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      background: #090d16;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 10px;
+    }
+    .slide-wrapper {
+      width: 1280px;
+      height: 720px;
+      background: #f8fafc;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    /* Top Nav / Header */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 30px;
+      background: #ffffff;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .team-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .team-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #0284c7, #4f46e5);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 17px;
+    }
+    .team-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: 0.5px;
+    }
+    .header-center {
+      text-align: center;
+    }
+    .header-center h1 {
+      font-size: 21px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: 0.5px;
+    }
+    .header-center p {
+      font-size: 11.5px;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+    .sih-tag {
+      text-align: right;
+    }
+    .sih-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .sih-sub {
+      font-size: 10.5px;
+      color: #0284c7;
+      font-weight: 700;
+    }
+
+    /* Main Grid */
+    .content-area {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 14px 28px 10px 28px;
+      flex: 1;
+    }
+
+    .pillar-box {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .pillar-head {
+      padding: 10px 14px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pillar-head h2 {
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+    .pillar-head.blue { background: #1e3a8a; }
+    .pillar-head.purple { background: #581c87; }
+    .pillar-head.teal { background: #065f46; }
+
+    .pillar-body {
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+    .bullet-items {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .b-item {
+      display: flex;
+      gap: 8px;
+      font-size: 11.2px;
+      line-height: 1.45;
+      color: #334155;
+    }
+    .b-icon {
+      font-size: 13px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .b-item strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    /* Custom visual tags */
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 8px;
+    }
+    .t-badge {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    /* Metrics Strip */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .m-card {
+      padding: 5px 6px;
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+    }
+    .m-card.blue { background: #eff6ff; border-color: #bfdbfe; }
+    .m-card.purple { background: #faf5ff; border-color: #e9d5ff; }
+    .m-card.teal { background: #ecfdf5; border-color: #a7f3d0; }
+
+    .m-val {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .m-card.blue .m-val { color: #1d4ed8; }
+    .m-card.purple .m-val { color: #7e22ce; }
+    .m-card.teal .m-val { color: #047857; }
+
+    .m-lbl {
+      font-size: 8.5px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    /* Risk & Mitigation Mini-Matrix */
+    .matrix-section {
+      margin: 0 28px 10px 28px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 8px 14px;
+    }
+    .matrix-head {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #334155;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .m-item {
+      background: #f8fafc;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border-left: 3px solid #0284c7;
+      font-size: 10px;
+      line-height: 1.35;
+      color: #475569;
+    }
+    .m-item strong {
+      color: #0f172a;
+      display: block;
+      font-size: 10.2px;
+      margin-bottom: 2px;
+    }
+
+    /* Bottom Flow */
+    .flow-bar {
+      background: #ffffff;
+      border-top: 2px solid #e2e8f0;
+      padding: 8px 28px 12px 28px;
+    }
+    .flow-steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .step-box {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      padding: 6px 10px;
+      border-radius: 6px;
+      position: relative;
+    }
+    .step-box.active {
+      background: #0f172a;
+      border-color: #0f172a;
+      color: #fff;
+    }
+    .step-box.active .step-title { color: #38bdf8; }
+    .step-box.active .step-desc { color: #cbd5e1; }
+    .step-tag {
+      font-size: 8px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+    .step-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .step-desc {
+      font-size: 9px;
+      color: #475569;
+    }
+    .step-arrow {
+      color: #94a3b8;
+      font-weight: 900;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slide-wrapper" contenteditable="true" spellcheck="false">
+
+  <!-- Top Header -->
+  <div class="top-header">
+    <div class="team-badge">
+      <div class="team-icon">N</div>
+      <div class="team-title">NEURAL NOMADS</div>
+    </div>
+    <div class="header-center">
+      <h1>FEASIBILITY &amp; VIABILITY</h1>
+      <p>Validated Architecture • Sustainable Economics • Scalable National Impact</p>
+    </div>
+    <div class="sih-tag">
+      <div class="sih-title">SMART INDIA HACKATHON 2026</div>
+      <div class="sih-sub">EVALUATION PITCH • SLIDE 03</div>
+    </div>
+  </div>
+
+  <!-- 3 Pillars Grid -->
+  <div class="content-area">
+
+    <!-- Pillar 1: Technical -->
+    <div class="pillar-box">
+      <div class="pillar-head teal">
+        <span>⚡</span>
+        <h2>Technical Feasibility (Proven &amp; Working)</h2>
+      </div>
+      <div class="pillar-body">
+        <div class="bullet-items">
+          <div class="b-item">
+            <span class="b-icon">⚙️</span>
+            <div><strong>Zero Hardware Dependency:</strong> Real-time simulations run via lightweight WebAssembly/wrappers without requiring expensive cryogenic quantum hardware.</div>
+          </div>
+          <div class="b-item">
+            <span class="b-icon">🔄</span>
+            <div><strong>Bi-Directional Quantum Lab:</strong> Drag-and-drop circuit canvas syncs with Python/Qiskit code with sub-second Bloch vector updates.</div>
+          </div>
+          <div class="b-item">
+            <span class="b-icon">🤖</span>
+            <div><strong>Qumi AI Multimodal Engine:</strong> Built-in qubit calculator, automatic note summarization, image query solver, and circuit error analyzer.</div>
+          </div>
+        </div>
+
+        <div class="tech-badges">
+          <span class="t-badge">Qiskit Aer</span>
+          <span class="t-badge">PennyLane</span>
+          <span class="t-badge">Cirq</span>
+          <span class="t-badge">WebGL 3D Coordinates</span>
+        </div>
+
+        <div class="metrics-row">
+          <div class="m-card teal">
+            <div class="m-val">Functional</div>
+            <div class="m-lbl">MVP Status</div>
+          </div>
+          <div class="m-card teal">
+            <div class="m-val">&lt; 1 sec</div>
+            <div class="m-lbl">Sync Latency</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillar 2: Operational -->
+    <div class="pillar-box">
+      <div class="pillar-head blue">
+        <span>🎮</span>
+        <h2>Operational Viability (High Retention)</h2>
+      </div>
+      <div class="pillar-body">
+        <div class="bullet-items">
+          <div class="b-item">
+            <span class="b-icon">🕹️</span>
+            <div><strong>Addiction to Learning:</strong> <em>Quantum Rush</em> 3-life obstacle mechanics force learners to solve core quantum quizzes to advance, ending MOOC dropout rates.</div>
+          </div>
+          <div class="b-item">
+            <span class="b-icon">📚</span>
+            <div><strong>Structured E-Library:</strong> Tiered roadmaps (Beginner ➔ Intermediate ➔ Advanced) with definitions, formulas, graphs, and XP earning tests.</div>
+          </div>
+          <div class="b-item">
+            <span class="b-icon">📊</span>
+            <div><strong>Educator Empowerment:</strong> Instructors easily assign custom circuits, track concept bottlenecks, and conduct lab exams in one dashboard.</div>
+          </div>
+        </div>
+
+        <div class="tech-badges">
+          <span class="t-badge">Zero-Install Web</span>
+          <span class="t-badge">Low-Bandwidth Ready</span>
+          <span class="t-badge">Mobile Responsive</span>
+        </div>
+
+        <div class="metrics-row">
+          <div class="m-card blue">
+            <div class="m-val">500M+</div>
+            <div class="m-lbl">Target Students</div>
+          </div>
+          <div class="m-card blue">
+            <div class="m-val">90%+</div>
+            <div class="m-lbl">Retention Potential</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pillar 3: Economic -->
+    <div class="pillar-box">
+      <div class="pillar-head purple">
+        <span>💼</span>
+        <h2>Economic Viability (Sustainable Model)</h2>
+      </div>
+      <div class="pillar-body">
+        <div class="bullet-items">
+          <div class="b-item">
+            <span class="b-icon">👥</span>
+            <div><strong>B2C Freemium:</strong> Free core E-Library, beginner gates, and Rush levels; Pro tier unlocks algorithm visualizers and unlimited Qumi AI debugging.</div>
+          </div>
+          <div class="b-item">
+            <span class="b-icon">🏛️</span>
+            <div><strong>B2B Institutional SaaS:</strong> Sold to engineering colleges as a turnkey virtual quantum computing laboratory, saving lakhs in physical lab setups.</div>
+          </div>
+          <div class="b-item">
+            <span class="b-icon">📉</span>
+            <div><strong>Near-Zero Cost Per User:</strong> Client-side rendering and serverless execution keep cloud hosting overhead minimal as user counts scale.</div>
+          </div>
+        </div>
+
+        <div class="tech-badges">
+          <span class="t-badge">Dual B2B/B2C</span>
+          <span class="t-badge">Low Server Burn</span>
+          <span class="t-badge">NQM Alignment</span>
+        </div>
+
+        <div class="metrics-row">
+          <div class="m-card purple">
+            <div class="m-val">₹0</div>
+            <div class="m-lbl">Lab HW Cost</div>
+          </div>
+          <div class="m-card purple">
+            <div class="m-val">300%</div>
+            <div class="m-lbl">Scale Margin</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Risk Mitigation Matrix -->
+  <div class="matrix-section">
+    <div class="matrix-head">
+      <span>Risk Mitigation &amp; Reliability Defense</span>
+      <span style="color:#0284c7;">Built-In Platform Safeguards</span>
+    </div>
+    <div class="matrix-grid">
+      <div class="m-item">
+        <strong>Risk: AI Hallucinations in Qumi</strong>
+        Mitigation: RAG grounded strictly on curated E-Library concepts and strict quantum circuit verification rules.
+      </div>
+      <div class="m-item">
+        <strong>Risk: Heavy Circuit Computation</strong>
+        Mitigation: Hybrid pipeline: Small circuits run locally; heavy multi-qubit workloads route dynamically to cloud backends.
+      </div>
+      <div class="m-item">
+        <strong>Risk: Learner Fatigue &amp; Drop-offs</strong>
+        Mitigation: Integrated Quantum Rush gaming loop with XP, lives, and leaderboard competitions.
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Journey Flow -->
+  <div class="flow-bar">
+    <div class="flow-steps">
+      <div class="step-box">
+        <div class="step-tag">Step 1 • Foundation</div>
+        <div class="step-title">E-Library &amp; Qumi AI</div>
+        <div class="step-desc">Conceptual mastery &amp; notes</div>
+      </div>
+      <div class="step-arrow">➔</div>
+      <div class="step-box">
+        <div class="step-tag">Step 2 • Practice</div>
+        <div class="step-title">Quantum Rush Game</div>
+        <div class="step-desc">Gamified quiz &amp; obstacle loop</div>
+      </div>
+      <div class="step-arrow">➔</div>
+      <div class="step-box">
+        <div class="step-tag">Step 3 • Experiment</div>
+        <div class="step-title">Quantum Lab &amp; 3D Vis</div>
+        <div class="step-desc">Drag-drop circuit &amp; Bloch sync</div>
+      </div>
+      <div class="step-arrow">➔</div>
+      <div class="step-box">
+        <div class="step-tag">Step 4 • Institutionalize</div>
+        <div class="step-title">Academic Dashboards</div>
+        <div class="step-desc">College analytics &amp; lab exams</div>
+      </div>
+      <div class="step-arrow">➔</div>
+      <div class="step-box active">
+        <div class="step-tag">Final Impact</div>
+        <div class="step-title">Quantum-Ready Bharat</div>
+        <div class="step-desc">National Quantum Mission talent</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
